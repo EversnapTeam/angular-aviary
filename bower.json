@@ -1,0 +1,29 @@
+{
+  "name": "adobe-creative-ng",
+  "version": "0.0.0",
+  "authors": [
+    "Massimiliano Sartoretto <massimilianosartoretto@gmail.com>"
+  ],
+  "description": "An angular wrapper for adobe creative SDK",
+  "main": "adobe-creative-ng.js",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "angular",
+    "image",
+    "adobe",
+    "creative"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

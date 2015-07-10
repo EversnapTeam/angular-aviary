@@ -1,0 +1,17 @@
+{
+  "name": "adobe-creative-ng",
+  "version": "0..0.0",
+  "description": "An angular wrapper for adobe creative SDK",
+  "main": "adobe-creative-ng.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "angular",
+    "adobe",
+    "creative",
+    "image"
+  ],
+  "author": "m00s for Eversnap",
+  "license": "MIT"
+}
