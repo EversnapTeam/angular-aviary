@@ -1,4 +1,4 @@
-/* adobe-creative-ng.js / v1.0.0 / (c) 2015 Massimiliano Sartoretto / MIT Licence */
+/* adobe-creative-ng.js / v0.0.1 / (c) 2015 Massimiliano Sartoretto / MIT Licence */
 
 'format amd';
 /* global define */
@@ -6,9 +6,9 @@
 (function () {
   'use strict';
 
-  function adobeCreativeNg(angular, adobeCreativeSDK) {
+  function adobeCreativeNg(angular, Aviary) {
 
-    return angular.module('m00sCreativeNG', [])
+    return angular.module('adobeCreativeNg', [])
 
       .directive('ngCreative', ['ngCreative', function (ngCreative) {
 
@@ -55,8 +55,12 @@
             function onSaveCb(imageID, newURL) {
               var img = document.getElementById(imageID);
               img.src = newURL;
-              // TODO save back to eversnap cloudfront
-              (scope.onSave || angular.noop)();
+
+              // User callback call
+              (scope.onSave || angular.noop)({
+                id:imageID,
+                newURL: newURL
+              });
 
               if(scope.closeOnSave || ngCreative.configuration.closeOnSave){
                 featherEditor.close();
@@ -125,4 +129,13 @@
         };
       });
   }
+
+  if (typeof define === 'function' && define.amd) {
+		define(['angular', 'Aviary'], adobeCreativeNg);
+	} else if (typeof module !== 'undefined' && module && module.exports) {
+		adobeCreativeNg(angular, require('Aviary'));
+		module.exports = 'adobeCreativeNg';
+	} else {
+		adobeCreativeNg(angular, (typeof global !== 'undefined' ? global : window).Aviary);
+	}
 })();

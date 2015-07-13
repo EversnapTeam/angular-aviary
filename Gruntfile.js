@@ -1,11 +1,11 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
     uglify: {
       build: {
-        src: 'adobe-creative-ng.js',
-        dest: 'adobe-creative-ng.min.js'
+        files: {
+          'adobe-creative-ng.min.js': ['adobe-creative-ng.js']
+        }
       }
     },
     jshint: {
