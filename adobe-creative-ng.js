@@ -13,32 +13,31 @@
       .directive('ngCreative', ['ngCreative', function (ngCreative) {
 
         return {
-          restrict: 'AE',
-          template: '<input type="image" ng-src="{{scope.src}}"/>',
+          restrict: 'E',
+          template: '<input type="image"/>',
           replace: true,
           scope: {
-            appendTo: '@',
-            closeOnSave: '@',
             target: '@',
-            theme: '@',
-            tools: '@',
-            onSave: '&'
+            onSave: '&',
+            onSaveButtonClicked: '&'
           },
-          link: function (scope, element) {
+          link: function (scope, element, attrs) {
 
             element.bind('click', function () {
               return launchEditor(scope.target, srcById(scope.target));
             });
 
-            var featherEditor = new Aviary.Feather({
-              apiKey: ngCreative.configuration.apiKey,
-              theme: scope.theme || ngCreative.configuration.theme,
-              tools: scope.tools || ngCreative.configuration.tools,
-              appendTo: scope.appendTo || '',
+            // Callbacks obj
+            var cbs = {
+              onSaveButtonClicked: onSaveButtonClickedCb,
               onSave: onSaveCb,
               onError: onErrorCb,
               onClose: onCLoseCb
-            });
+            };
+
+            var featherEditor = new Aviary.Feather(
+              angular.extend({}, ngCreative.configuration, cbs)
+            );
 
             function launchEditor(id, src) {
               featherEditor.launch({
@@ -52,13 +51,18 @@
               return document.getElementById(id).src;
             }
 
+            function onSaveButtonClickedCb(imageID) {
+              // User onSaveButtonClicked callback
+              (scope.onSaveButtonClicked || angular.noop)({id: imageID});
+            }
+
             function onSaveCb(imageID, newURL) {
               var img = document.getElementById(imageID);
               img.src = newURL;
 
-              // User callback call
+              // User onSave callback
               (scope.onSave || angular.noop)({
-                id:imageID,
+                id: imageID,
                 newURL: newURL
               });
 
@@ -80,8 +84,7 @@
         var defaults = {
           apiKey: null,
           theme: 'dark',
-          tools: 'all',
-          closeOnSave: false
+          tools: 'all'
         };
 
         var requiredKeys = [
