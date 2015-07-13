@@ -1,6 +1,6 @@
 {
   "name": "adobe-creative-ng",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An angular wrapper for adobe creative SDK",
   "main": "adobe-creative-ng.js",
   "scripts": {
