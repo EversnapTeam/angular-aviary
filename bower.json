@@ -1,11 +1,15 @@
 {
-  "name": "adobe-creative-ng",
-  "version": "0.0.2",
+  "name": "angular-aviary",
+  "version": "0.1.0",
   "authors": [
     "Massimiliano Sartoretto <massimilianosartoretto@gmail.com>"
   ],
   "description": "An angular wrapper for adobe creative SDK",
   "main": "adobe-creative-ng.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:m00s/angular-aviary.git"
+  }
   "moduleType": [
     "amd",
     "es6",
