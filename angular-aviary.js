@@ -1,4 +1,8 @@
-/* angular.aviary.js / v0.0.1 / (c) 2015 Massimiliano Sartoretto / MIT Licence */
+/*
+	angular-aviary v0.2.0
+	(c) 2015 Massimiliano Sartoretto <massimilianosartoretto@gmail.com>
+	License: MIT
+*/
 
 'format amd';
 /* global define */
