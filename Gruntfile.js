@@ -24,7 +24,7 @@ module.exports = function(grunt) {
 			}
 		},
     jshint: {
-      src: ['angular-aviary.js']
+      src: ['angular-aviary.js', 'tests.js']
     }
   });
   grunt.loadNpmTasks('grunt-karma');
