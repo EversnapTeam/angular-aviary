@@ -1,8 +1,8 @@
 {
-  "name": "adobe-creative-ng",
-  "version": "0.0.2",
+  "name": "angular-aviary",
+  "version": "0.1.0",
   "description": "An angular wrapper for adobe creative SDK",
-  "main": "adobe-creative-ng.js",
+  "main": "angular-aviary.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +12,6 @@
     "creative",
     "image"
   ],
-  "author": "m00s for Eversnap",
+  "author": "Massimiliano Sartoretto <massimilianosartoretto@gmail.com>",
   "license": "MIT"
 }
