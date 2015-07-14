@@ -1,4 +1,4 @@
-/* adobe-creative-ng.js / v0.0.1 / (c) 2015 Massimiliano Sartoretto / MIT Licence */
+/* angular.aviary.js / v0.0.1 / (c) 2015 Massimiliano Sartoretto / MIT Licence */
 
 'format amd';
 /* global define */
@@ -6,11 +6,11 @@
 (function () {
   'use strict';
 
-  function adobeCreativeNg(angular, Aviary) {
+  function ngAviary(angular, Aviary) {
 
-    return angular.module('adobeCreativeNg', [])
+    return angular.module('ngAviary', [])
 
-      .directive('ngCreative', ['ngCreative', function (ngCreative) {
+      .directive('ngAviary', ['ngAviary', function (ngAviary) {
 
         return {
           restrict: 'E',
@@ -36,7 +36,7 @@
             };
 
             var featherEditor = new Aviary.Feather(
-              angular.extend({}, ngCreative.configuration, cbs)
+              angular.extend({}, ngAviary.configuration, cbs)
             );
 
             function launchEditor(id, src) {
@@ -66,7 +66,7 @@
                 newURL: newURL
               });
 
-              if(scope.closeOnSave || ngCreative.configuration.closeOnSave){
+              if(scope.closeOnSave || ngAviary.configuration.closeOnSave){
                 featherEditor.close();
               }
             }
@@ -80,7 +80,7 @@
         };
       }])
 
-      .provider('ngCreative', function(){
+      .provider('ngAviary', function(){
         var defaults = {
           apiKey: null,
           theme: 'dark',
@@ -119,7 +119,7 @@
 
         this.$get = function() {
           if(!config) {
-            throw new Error('ngCreativeProvider must be configured first.');
+            throw new Error('ngAviary must be configured first.');
           }
 
           var getConfig = (function() {
@@ -134,11 +134,11 @@
   }
 
   if (typeof define === 'function' && define.amd) {
-		define(['angular', 'Aviary'], adobeCreativeNg);
+		define(['angular', 'Aviary'], ngAviary);
 	} else if (typeof module !== 'undefined' && module && module.exports) {
-		adobeCreativeNg(angular, require('Aviary'));
-		module.exports = 'adobeCreativeNg';
+		ngAviary(angular, require('Aviary'));
+		module.exports = 'ngAviary';
 	} else {
-		adobeCreativeNg(angular, (typeof global !== 'undefined' ? global : window).Aviary);
+		ngAviary(angular, (typeof global !== 'undefined' ? global : window).Aviary);
 	}
 })();

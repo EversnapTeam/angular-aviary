@@ -4,12 +4,12 @@ module.exports = function(grunt) {
     uglify: {
       build: {
         files: {
-          'adobe-creative-ng.min.js': ['adobe-creative-ng.js']
+          'angular-aviary.min.js': ['angular-aviary.js']
         }
       }
     },
     jshint: {
-      src: ['adobe-creative-ng.js']
+      src: ['angular-aviary.js']
     }
   });
 
