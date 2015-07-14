@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+  require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -27,13 +28,8 @@ module.exports = function(grunt) {
       src: ['angular-aviary.js', 'tests.js']
     }
   });
-  grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.registerTask('test', [
-		'jshint',
-		'karma'
-	]);
+
+  grunt.registerTask('test', ['jshint','karma']);
   grunt.registerTask('default', ['jshint']);
   grunt.registerTask('build', ['uglify', 'jshint']);
 };
