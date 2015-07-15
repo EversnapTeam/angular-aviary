@@ -26,8 +26,8 @@ You can choose your preferred method of installation:
 * Download from github: [angular-aviary.min.js](https://github.com/m00s/angular-adobe-creative/blob/master/angular-aviary.min.js)
 
 Usage
------
-Include both [Aviary](http://feather.aviary.com/imaging/v2/editor.js) and angular-aviary.min.js in your application.
+---------
+Include both [Aviary](http://feather.aviary.com/imaging/v2/editor.js) and `angular-aviary.min.js` in your application.
 
 ```html
 <script src="http://feather.aviary.com/imaging/v2/editor.js"></script>
@@ -53,5 +53,29 @@ myApp.config(function(ngAviaryProvider) {
   })
 });
 ```
+For the full list of config options please refer to the [official docs](https://developers.aviary.com/docs/web/setup-guide)
 
-For the config options please refer to the [official docs](https://developers.aviary.com/docs/web/setup-guide)
+### ngAviary directive
+Use the ngAviary directive to create a button that trigger Fetcher editor.
+```js
+<ng-aviary
+  src='http://images.aviary.com/images/edit-photo.png'
+  value='Edit photo'
+  class="className"
+  target='imageID'
+  on-save-button-clicked='onSaveButtonClicked(id)'
+  on-save='onSave(id, newURL)'></ng-aviary>
+```
+You can use `src`, `value` and `class` attributes to set the input appearance.
+
+Other options allow you to handle Aviary flow:
+
+|Attribute|Description|Required|
+|:-------|:---------|:---------:|
+|target|Either the image element to be edited or its ID.| :heavy_check_mark:
+|onLoad|Pass a function to run once the widget has all resources ready for a launch.|:heavy_multiplication_x:
+|onReady|Pass a function to be called once the editor has finished launching and is ready for user input.|:heavy_multiplication_x:
+|onSaveButtonClicked|Pass a function to be called before an image save happens, but after a user has clicked the save button, intending to save. | :heavy_multiplication_x:
+|onSave|Pass a function to be called when the image save is complete.| :heavy_multiplication_x:
+|onClose|Pass a function to be called when the editor is closed. `isDirty` parameter tells whether the editor was closed with unsaved changes.|:heavy_multiplication_x:
+|onError|The API can notify you of errors and you have the option to notify the user. They are otherwise silent.|:heavy_multiplication_x:
