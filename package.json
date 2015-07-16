@@ -1,6 +1,6 @@
 {
   "name": "angular-aviary",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "An angular wrapper for adobe creative SDK",
   "main": "angular-aviary.min.js",
   "scripts": {
