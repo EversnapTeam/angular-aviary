@@ -1,5 +1,5 @@
 /*
-	angular-aviary v0.3.1
+	angular-aviary v0.3.2
 	(c) 2015 Massimiliano Sartoretto <massimilianosartoretto@gmail.com>
 	License: MIT
 */
@@ -40,7 +40,7 @@
             onSaveButtonClicked: onSaveButtonClickedCb,
             onSave: onSaveCb,
             onError: onErrorCb,
-            onClose: onCLoseCb
+            onClose: onCloseCb
           };
 
           var featherEditor = new Aviary.Feather(
@@ -61,9 +61,6 @@
           }
 
           function onSaveCb(imageID, newURL) {
-            var img = document.getElementById(imageID);
-            img.src = newURL;
-
             // User onSave callback
             (scope.onSave || angular.noop)({
               id: imageID,
@@ -76,10 +73,18 @@
           }
 
           function onErrorCb(errorObj) {
-            throw new Error(errorObj.message);
+            // User errback
+            (scope.onError || angular.noop)({
+              error: errorObj
+            });
           }
 
-          function onCLoseCb(isDirty) {}
+          function onCloseCb(isDirty) {
+            // User onClose callback
+            (scope.onClose || angular.noop)({
+              isDirty: isDirty
+            });
+          }
         }
       };
     }
@@ -88,9 +93,7 @@
       /* jshint validthis:true */
 
       var defaults = {
-        apiKey: null,
-        theme: 'dark',
-        tools: 'all'
+        apiKey: null
       };
 
       var requiredKeys = [
@@ -100,20 +103,20 @@
       var config;
 
       this.configure = function(params) {
-        // Can only be configured once.
+        // Can only be configured once
         if (config) {
           throw new Error('Already configured.');
         }
 
-        // Check if is an `object`.
+        // Check if it is an `object`
         if (!(params instanceof Object)) {
           throw new TypeError('Invalid argument: `config` must be an `Object`.');
         }
 
-        // Extend default configuration.
+        // Extend default configuration
         config = angular.extend({}, defaults, params);
 
-        // Check if all required keys are set.
+        // Check if all required keys are set
         angular.forEach(requiredKeys, function(key) {
           if (!config[key]) {
             throw new Error('Missing parameter:', key);
