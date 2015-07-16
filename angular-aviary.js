@@ -1,5 +1,5 @@
 /*
-	angular-aviary v0.2.0
+	angular-aviary v0.3.1
 	(c) 2015 Massimiliano Sartoretto <massimilianosartoretto@gmail.com>
 	License: MIT
 */
@@ -29,8 +29,10 @@
         },
         link: function (scope, element, attrs) {
 
+          var targetImage = window.document.querySelector(scope.target);
+
           element.bind('click', function () {
-            return launchEditor(scope.target, srcById(scope.target));
+            return launchEditor();
           });
 
           // Callbacks obj
@@ -45,16 +47,12 @@
             angular.extend({}, ngAviary.configuration, cbs)
           );
 
-          function launchEditor(id, src) {
+          function launchEditor() {
             featherEditor.launch({
-              image: id,
-              url: src
+              image: targetImage,
+              url: targetImage.src
             });
             return false;
-          }
-
-          function srcById(id) {
-            return document.getElementById(id).src;
           }
 
           function onSaveButtonClickedCb(imageID) {
@@ -88,7 +86,7 @@
 
     function ngAviaryProvider(){
       /* jshint validthis:true */
-      
+
       var defaults = {
         apiKey: null,
         theme: 'dark',

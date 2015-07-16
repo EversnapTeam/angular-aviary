@@ -5,6 +5,7 @@
 
 describe('module ngAviary', function () {
 	var $rootScope, $compile, $window, AdobeAviary, ngAviary, mockEditor;
+	var imageElement = document.createElement('img');
 
   mockEditor = {
     launch: function(a){return false;}
@@ -35,6 +36,7 @@ describe('module ngAviary', function () {
     (function($window) {
       window = $window;
       spyOn(window.Aviary, 'Feather').and.returnValue(mockEditor);
+      spyOn(window.document, 'querySelector').and.returnValue(imageElement);
       spyOn(mockEditor, 'launch');
     })();
 	}));
@@ -55,7 +57,6 @@ describe('module ngAviary', function () {
 
   describe('ngAviary directive', function() {
     var element, scope;
-    var imageElement = document.createElement('img');
 
     beforeEach(inject(function($rootScope, $compile) {
       spyOn(document, 'getElementById').and.returnValue(imageElement);
