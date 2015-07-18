@@ -62,7 +62,7 @@ Use the ngAviary directive to create a button that trigger Fetcher editor.
   src='http://images.aviary.com/images/edit-photo.png'
   value='Edit photo'
   class="className"
-  target='imageID'
+  target='<selector>'
   on-save-button-clicked='onSaveButtonClicked(id)'
   on-save='onSave(id, newURL)'></ng-aviary>
 ```
@@ -72,7 +72,7 @@ Other options allow you to handle Aviary flow:
 
 |Attribute|Description|Required|
 |:-------|:---------|:---------:|
-|target|Either the image element to be edited or its ID.| :heavy_check_mark:
+|target|A string containing one or more CSS selector to query target image| :heavy_check_mark:
 |onLoad|Pass a function to run once the widget has all resources ready for a launch.|:heavy_multiplication_x:
 |onReady|Pass a function to be called once the editor has finished launching and is ready for user input.|:heavy_multiplication_x:
 |onSaveButtonClicked|Pass a function to be called before an image save happens, but after a user has clicked the save button, intending to save. | :heavy_multiplication_x:
