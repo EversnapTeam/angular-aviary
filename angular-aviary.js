@@ -1,5 +1,5 @@
 /*
-	angular-aviary v0.3.2
+	angular-aviary v0.4.0
 	(c) 2015 Massimiliano Sartoretto <massimilianosartoretto@gmail.com>
 	License: MIT
 */
@@ -20,8 +20,11 @@
     function ngAviaryDirective(ngAviary) {
       return {
         restrict: 'E',
-        template: '<input type="image"/>',
+        transclude: true,
         replace: true,
+        template: '<a href="#">' +
+                    '<ng-transclude></ng-transclude>' +
+                  '</a>',
         scope: {
           target: '@',
           onSave: '&',
@@ -31,7 +34,8 @@
 
           var targetImage = window.document.querySelector(scope.target);
 
-          element.bind('click', function () {
+          element.bind('click', function(e) {
+            e.preventDefault();
             return launchEditor();
           });
 
