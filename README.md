@@ -59,14 +59,12 @@ For the full list of config options please refer to the [official docs](https://
 Use the ngAviary directive to create a button that trigger Fetcher editor.
 ```js
 <ng-aviary
-  src='http://images.aviary.com/images/edit-photo.png'
-  value='Edit photo'
   class="className"
   target='<selector>'
   on-save-button-clicked='onSaveButtonClicked(id)'
-  on-save='onSave(id, newURL)'></ng-aviary>
+  on-save='onSave(id, newURL)'> Edit photo </ng-aviary>
 ```
-You can use `src`, `value` and `class` attributes to set the input appearance.
+You can use `class` attribute to set the toggle appearance. Currently an `<a></a>` html element is returned.
 
 Other options allow you to handle Aviary flow:
 
