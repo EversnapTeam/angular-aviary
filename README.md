@@ -56,17 +56,17 @@ myApp.config(function(ngAviaryProvider) {
 For the full list of config options please refer to the [official docs](https://developers.aviary.com/docs/web/setup-guide)
 
 ### ngAviary directive
-Use the ngAviary directive to create a button that trigger Fetcher editor.
+Use the ngAviary directive to create a toggle that trigger Fetcher editor.
 ```js
-<ng-aviary
-  class="className"
-  target='<selector>'
-  on-save-button-clicked='onSaveButtonClicked(id)'
-  on-save='onSave(id, newURL)'> Edit photo </ng-aviary>
+<a href="#"
+   target='<selector>'
+   on-save-button-clicked='onSaveButtonClicked(id)'
+   on-save='onSave(id, newURL)'
+   ng-aviary> Edit photo </a>
 ```
-You can use `class` attribute to set the toggle appearance. Currently an `<a></a>` html element is returned.
+You can use the HTML element you prefer as long as it supports **onClick** event. (For a list of supported elements refer to the [onCLick docs](http://www.w3schools.com/jsref/event_onclick.asp))
 
-Other options allow you to handle Aviary flow:
+Options that allow you to handle the Aviary flow:
 
 |Attribute|Description|Required|
 |:-------|:---------|:---------:|
