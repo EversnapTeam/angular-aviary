@@ -63,7 +63,7 @@ describe('module ngAviary', function () {
 
       scope = $rootScope.$new();
       element = angular.element(
-          '<ng-aviary target="42"></ng-aviary>');
+          '<a target="42" ng-aviary></a>');
 
       element = $compile(element)(scope);
       scope.$digest();
