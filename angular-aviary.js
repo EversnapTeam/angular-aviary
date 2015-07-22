@@ -1,5 +1,5 @@
 /*
-	angular-aviary v0.4.0
+	angular-aviary v0.5.0
 	(c) 2015 Massimiliano Sartoretto <massimilianosartoretto@gmail.com>
 	License: MIT
 */
@@ -19,12 +19,7 @@
 
     function ngAviaryDirective(ngAviary) {
       return {
-        restrict: 'E',
-        transclude: true,
-        replace: true,
-        template: '<a href="#">' +
-                    '<ng-transclude></ng-transclude>' +
-                  '</a>',
+        restrict: 'A',
         scope: {
           target: '@',
           onSave: '&',
