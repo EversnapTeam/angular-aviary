@@ -58,20 +58,44 @@ describe('module ngAviary', function () {
   describe('ngAviary directive', function() {
     var element, scope;
 
-    beforeEach(inject(function($rootScope, $compile) {
-      spyOn(document, 'getElementById').and.returnValue(imageElement);
-
+		function compileElementAndClick(el, click) {
+			el = el ? el : angular.element('<a target-selector="42" ng-aviary></a>');
       scope = $rootScope.$new();
-      element = angular.element(
-          '<a target="42" ng-aviary></a>');
-
-      element = $compile(element)(scope);
+      element = $compile(el)(scope);
       scope.$digest();
-    }));
+			if(click) {
+				element.triggerHandler('click');
+			}
+		}
 
-    it('should launch the Feather editor when clicked', function(){
-      element.triggerHandler('click');
-      expect(mockEditor.launch).toHaveBeenCalled();
+    beforeEach(function() {
+      spyOn(document, 'getElementById').and.returnValue(imageElement);
     });
+
+		describe('should launch the Feather editor', function() {
+			it('when clicked', function(){
+				compileElementAndClick(null, true);
+	      expect(mockEditor.launch).toHaveBeenCalled();
+	    });
+
+			it('with target-selector by default', function() {
+				compileElementAndClick(
+					angular.element('<a target-selector="#42" ng-aviary></a>'), true
+				);
+				var paramsObj = {image: imageElement, url: imageElement.src};
+				expect(mockEditor.launch).toHaveBeenCalledWith(paramsObj);
+			});
+
+			it('with target-src if provided', function(){
+				compileElementAndClick(
+					angular.element('<a target-selector=\'#42\'' +
+															'target-src=\'towel.png\'' +
+															'ng-aviary></a>'),
+					true
+				);
+				var paramsObj = {image: imageElement, url: 'towel.png'};
+	      expect(mockEditor.launch).toHaveBeenCalledWith(paramsObj);
+	    });
+		});
   });
 });

@@ -1,5 +1,5 @@
 /*
-	angular-aviary v0.5.0
+	angular-aviary v0.5.1
 	(c) 2015 Massimiliano Sartoretto <massimilianosartoretto@gmail.com>
 	License: MIT
 */
@@ -21,13 +21,14 @@
       return {
         restrict: 'A',
         scope: {
-          target: '@',
+          targetSelector: '@',
+          targetSrc: '@',
           onSave: '&',
           onSaveButtonClicked: '&'
         },
         link: function (scope, element, attrs) {
 
-          var targetImage = window.document.querySelector(scope.target);
+          var targetImage = window.document.querySelector(scope.targetSelector);
 
           element.bind('click', function(e) {
             e.preventDefault();
@@ -49,7 +50,7 @@
           function launchEditor() {
             featherEditor.launch({
               image: targetImage,
-              url: targetImage.src
+              url: scope.targetSrc || targetImage.src
             });
             return false;
           }
