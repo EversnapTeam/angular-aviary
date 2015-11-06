@@ -70,7 +70,7 @@ Options that allow you to handle the Aviary flow:
 
 |Attribute|Description|Required|
 |:-------|:---------|:---------:|
-|target|A string containing one or more CSS selector to query target image| :heavy_check_mark:
+|targetSelector|A string containing one or more CSS selector to query target image| :heavy_check_mark:
 |onLoad|Pass a function to run once the widget has all resources ready for a launch.|:heavy_multiplication_x:
 |onReady|Pass a function to be called once the editor has finished launching and is ready for user input.|:heavy_multiplication_x:
 |onSaveButtonClicked|Pass a function to be called before an image save happens, but after a user has clicked the save button, intending to save. | :heavy_multiplication_x:
