@@ -24,7 +24,8 @@
           targetSelector: '@',
           targetSrc: '@',
           onSave: '&',
-          onSaveButtonClicked: '&'
+          onSaveButtonClicked: '&',
+          onClose:  '&',
         },
         link: function (scope, element, attrs) {
 
