@@ -59,7 +59,7 @@ For the full list of config options please refer to the [official docs](https://
 Use the ngAviary directive to create a toggle that trigger Fetcher editor.
 ```js
 <a href="#"
-   target='<selector>'
+   target-selector='<selector>'
    on-save-button-clicked='onSaveButtonClicked(id)'
    on-save='onSave(id, newURL)'
    ng-aviary> Edit photo </a>
