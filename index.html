@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <div ng-controller="demoCtrl">
+      <div id='injection_site'></div>
+      <img id='targetImage' src='https://d1sb2vhc1h1lwk.cloudfront.net/designs/97067/Preview/191919/display.jpg'/>
+
+      <p>
+        <a href="#"
+          class="className"
+          target-selector='#targetImage'
+					on-save-button-clicked='onSaveButtonClicked(id)'
+          on-save='onSave(id, newURL)'
+          on-error='onError(error)'
+          ng-aviary>
+          Edit photo</a>
+      </p>
+
+    </div>
+	    <script type="text/javascript" src="./lib/angular.min.js"></script>
+	    <script type="text/javascript" src="./lib/aviary.js"></script>
+    	<script src="./js/angular-aviary.min.js"></script>
+    	<script src="./js/app.js"></script>
+  </body>
+</html>
