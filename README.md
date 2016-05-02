@@ -2,7 +2,7 @@
 
 AngularJS directive for [Aviary SDK](https://developers.aviary.com/).
 
-Copyright © 2015, [Massimiliano Sartoretto](mailto:massimilianosartoretto@gmail.com)
+Copyright © 2016, [Massimiliano Sartoretto](mailto:massimilianosartoretto@gmail.com)
 
 Find me on:
 [![alt text][1.1]][1]

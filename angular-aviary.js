@@ -1,6 +1,6 @@
 /*
-	angular-aviary v0.5.1
-	(c) 2015 Massimiliano Sartoretto <massimilianosartoretto@gmail.com>
+	angular-aviary v0.6.0
+	(c) 2016 Massimiliano Sartoretto <massimilianosartoretto@gmail.com>
 	License: MIT
 */
 
@@ -12,11 +12,7 @@
 
   function ngAviary(angular, Aviary) {
 
-    return angular
-      .module('ngAviary', [])
-      .directive('ngAviary', ['ngAviary', ngAviaryDirective])
-      .provider('ngAviary', ngAviaryProvider);
-
+    ngAviaryDirective.$inject = ['ngAviary'];
     function ngAviaryDirective(ngAviary) {
       return {
         restrict: 'A',
@@ -141,6 +137,11 @@
         };
       };
     }
+
+    return angular
+      .module('ngAviary', [])
+      .directive('ngAviary', ngAviaryDirective)
+      .provider('ngAviary', ngAviaryProvider);
   }
 
   if (typeof define === 'function' && define.amd) {

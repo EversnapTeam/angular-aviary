@@ -1,6 +1,6 @@
 {
   "name": "angular-aviary",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "An angular wrapper for adobe creative SDK",
   "main": "angular-aviary.min.js",
   "scripts": {
@@ -23,7 +23,6 @@
     "karma": "~0.12.0",
     "karma-coverage": "~0.2.0",
     "karma-jasmine": "~0.3.5",
-    "karma-phantomjs-launcher": "~0.1.1",
     "load-grunt-tasks": "3.1.0"
   },
   "author": "Massimiliano Sartoretto <massimilianosartoretto@gmail.com>",
