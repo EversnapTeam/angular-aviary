@@ -25,7 +25,7 @@
           targetSrc: '@',
           onSave: '&',
           onSaveButtonClicked: '&',
-          onClose:  '&',
+          onClose:  '&'
         },
         link: function (scope, element, attrs) {
 
