@@ -59,7 +59,8 @@ For the full list of config options please refer to the [official docs](https://
 Use the ngAviary directive to create a toggle that trigger Fetcher editor.
 ```js
 <a href="#"
-   target='<selector>'
+   target-selector='<selector>'
+   target-src='./image.png'
    on-save-button-clicked='onSaveButtonClicked(id)'
    on-save='onSave(id, newURL)'
    ng-aviary> Edit photo </a>
@@ -71,6 +72,7 @@ Options that allow you to handle the Aviary flow:
 |Attribute|Description|Required|
 |:-------|:---------|:---------:|
 |targetSelector|A string containing one or more CSS selector to query target image| :heavy_check_mark:
+|targetSrc|A string containing the url of the target image| :heavy_multiplication_x:
 |onLoad|Pass a function to run once the widget has all resources ready for a launch.|:heavy_multiplication_x:
 |onReady|Pass a function to be called once the editor has finished launching and is ready for user input.|:heavy_multiplication_x:
 |onSaveButtonClicked|Pass a function to be called before an image save happens, but after a user has clicked the save button, intending to save. | :heavy_multiplication_x:
