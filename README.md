@@ -86,8 +86,6 @@ Options that allow you to handle the Creative SDK Image Editor flow:
 |:-------|:---------|:---------:|
 |targetSelector|A string containing one or more CSS selector to query target image| :heavy_check_mark:
 |targetSrc|A string containing the url of the target image| :heavy_multiplication_x:
-|onLoad|Pass a function to run once the widget has all resources ready for a launch.|:heavy_multiplication_x:
-|onReady|Pass a function to be called once the editor has finished launching and is ready for user input.|:heavy_multiplication_x:
 |onSaveButtonClicked|Pass a function to be called before an image save happens, but after a user has clicked the save button, intending to save. | :heavy_multiplication_x:
 |onSave|Pass a function to be called when the image save is complete.| :heavy_multiplication_x:
 |onClose|Pass a function to be called when the editor is closed. `isDirty` parameter tells whether the editor was closed with unsaved changes.|:heavy_multiplication_x:
