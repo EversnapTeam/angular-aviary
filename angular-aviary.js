@@ -25,8 +25,6 @@
         },
         link: function (scope, element, attrs) {
 
-          var targetImage = window.document.querySelector(scope.targetSelector);
-
           element.bind('click', function(e) {
             e.preventDefault();
             return launchEditor();
@@ -45,6 +43,8 @@
           );
 
           function launchEditor() {
+            var targetImage = window.document.querySelector(scope.targetSelector);            
+
             featherEditor.launch({
               image: targetImage,
               url: scope.targetSrc || targetImage.src
