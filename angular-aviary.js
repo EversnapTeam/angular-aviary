@@ -7,149 +7,153 @@
 'format amd';
 /* global define */
 
-(function () {
-  'use strict';
+(function() {
+    'use strict';
 
-  function ngAviary(angular, Aviary) {
+    function ngAviary(angular, Aviary) {
 
-    ngAviaryDirective.$inject = ['ngAviary'];
-    function ngAviaryDirective(ngAviary) {
-      return {
-        restrict: 'A',
-        scope: {
-          targetSelector: '@',
-          targetSrc: '@',
-          onSave: '&',
-          onSaveButtonClicked: '&',
-          onClose:  '&'
-        },
-        link: function (scope, element, attrs) {
+        ngAviaryDirective.$inject = ['ngAviary'];
 
-          var targetImage = window.document.querySelector(scope.targetSelector);
+        function ngAviaryDirective(ngAviary) {
+            return {
+                restrict: 'A',
+                scope: {
+                    targetSelector: '@',
+                    targetSrc: '@',
+                    onSave: '&',
+                    onSaveButtonClicked: '&',
+                    onClose: '&'
+                },
+                link: function(scope, element, attrs) {
 
-          element.bind('click', function(e) {
-            e.preventDefault();
-            return launchEditor();
-          });
+                    var targetImage = window.document.querySelector(scope.targetSelector);
 
-          // Callbacks obj
-          var cbs = {
-            onSaveButtonClicked: onSaveButtonClickedCb,
-            onSave: onSaveCb,
-            onError: onErrorCb,
-            onClose: onCloseCb
-          };
+                    element.bind('click', function(e) {
+                        e.preventDefault();
+                        return launchEditor();
+                    });
 
-          var featherEditor = new Aviary.Feather(
-            angular.extend({}, ngAviary.configuration, cbs)
-          );
+                    // Callbacks obj
+                    var cbs = {
+                        onSaveButtonClicked: onSaveButtonClickedCb,
+                        onSave: onSaveCb,
+                        onError: onErrorCb,
+                        onClose: onCloseCb
+                    };
 
-          function launchEditor() {
-            featherEditor.launch({
-              image: targetImage,
-              url: scope.targetSrc || targetImage.src
-            });
-            return false;
-          }
+                    var featherEditor = new Aviary.Feather(
+                        angular.extend({}, ngAviary.configuration, cbs)
+                    );
 
-          function onSaveButtonClickedCb(imageID) {
-            // User onSaveButtonClicked callback
-            (scope.onSaveButtonClicked || angular.noop)({id: imageID});
-          }
+                    function launchEditor() {
+                        featherEditor.launch({
+                            image: targetImage,
+                            url: scope.targetSrc || targetImage.src
+                        });
+                        return false;
+                    }
 
-          function onSaveCb(imageID, newURL) {
-            // User onSave callback
-            (scope.onSave || angular.noop)({
-              id: imageID,
-              newURL: newURL
-            });
+                    function onSaveButtonClickedCb(imageID) {
+                        var canvasId = ngAviary.configuration.adobeCanvasSelector || '#avpw_canvas_element';
+                        var canvas = angular.element(document.querySelector(canvasId))[0];
 
-            if(scope.closeOnSave || ngAviary.configuration.closeOnSave){
-              featherEditor.close();
-            }
-          }
+                        // User onSaveButtonClicked callback
+                        return (scope.onSaveButtonClicked || angular.noop)({ id: imageID, canvas: canvas, featherEditor: featherEditor });
+                    }
 
-          function onErrorCb(errorObj) {
-            // User errback
-            (scope.onError || angular.noop)({
-              error: errorObj
-            });
-          }
+                    function onSaveCb(imageID, newURL) {
+                        // User onSave callback
+                        (scope.onSave || angular.noop)({
+                            id: imageID,
+                            newURL: newURL
+                        });
 
-          function onCloseCb(isDirty) {
-            // User onClose callback
-            (scope.onClose || angular.noop)({
-              isDirty: isDirty
-            });
-          }
+                        if (scope.closeOnSave || ngAviary.configuration.closeOnSave) {
+                            featherEditor.close();
+                        }
+                    }
+
+                    function onErrorCb(errorObj) {
+                        // User errback
+                        (scope.onError || angular.noop)({
+                            error: errorObj
+                        });
+                    }
+
+                    function onCloseCb(isDirty) {
+                        // User onClose callback
+                        (scope.onClose || angular.noop)({
+                            isDirty: isDirty
+                        });
+                    }
+                }
+            };
         }
-      };
+
+        function ngAviaryProvider() {
+            /* jshint validthis:true */
+
+            var defaults = {
+                apiKey: null
+            };
+
+            var requiredKeys = [
+                'apiKey'
+            ];
+
+            var config;
+
+            this.configure = function(params) {
+                // Can only be configured once
+                if (config) {
+                    throw new Error('Already configured.');
+                }
+
+                // Check if it is an `object`
+                if (!(params instanceof Object)) {
+                    throw new TypeError('Invalid argument: `config` must be an `Object`.');
+                }
+
+                // Extend default configuration
+                config = angular.extend({}, defaults, params);
+
+                // Check if all required keys are set
+                angular.forEach(requiredKeys, function(key) {
+                    if (!config[key]) {
+                        throw new Error('Missing parameter:', key);
+                    }
+                });
+
+                return config;
+            };
+
+            this.$get = function() {
+                if (!config) {
+                    throw new Error('ngAviary must be configured first.');
+                }
+
+                var getConfig = (function() {
+                    return config;
+                })();
+
+                return {
+                    configuration: getConfig
+                };
+            };
+        }
+
+        return angular
+            .module('ngAviary', [])
+            .directive('ngAviary', ngAviaryDirective)
+            .provider('ngAviary', ngAviaryProvider);
     }
 
-    function ngAviaryProvider(){
-      /* jshint validthis:true */
-
-      var defaults = {
-        apiKey: null
-      };
-
-      var requiredKeys = [
-        'apiKey'
-      ];
-
-      var config;
-
-      this.configure = function(params) {
-        // Can only be configured once
-        if (config) {
-          throw new Error('Already configured.');
-        }
-
-        // Check if it is an `object`
-        if (!(params instanceof Object)) {
-          throw new TypeError('Invalid argument: `config` must be an `Object`.');
-        }
-
-        // Extend default configuration
-        config = angular.extend({}, defaults, params);
-
-        // Check if all required keys are set
-        angular.forEach(requiredKeys, function(key) {
-          if (!config[key]) {
-            throw new Error('Missing parameter:', key);
-          }
-        });
-
-        return config;
-      };
-
-      this.$get = function() {
-        if(!config) {
-          throw new Error('ngAviary must be configured first.');
-        }
-
-        var getConfig = (function() {
-          return config;
-        })();
-
-        return {
-          configuration: getConfig
-        };
-      };
+    if (typeof define === 'function' && define.amd) {
+        define(['angular', 'Aviary'], ngAviary);
+    } else if (typeof module !== 'undefined' && module && module.exports) {
+        ngAviary(angular, require('Aviary'));
+        module.exports = 'ngAviary';
+    } else {
+        ngAviary(angular, (typeof global !== 'undefined' ? global : window).Aviary);
     }
-
-    return angular
-      .module('ngAviary', [])
-      .directive('ngAviary', ngAviaryDirective)
-      .provider('ngAviary', ngAviaryProvider);
-  }
-
-  if (typeof define === 'function' && define.amd) {
-		define(['angular', 'Aviary'], ngAviary);
-	} else if (typeof module !== 'undefined' && module && module.exports) {
-		ngAviary(angular, require('Aviary'));
-		module.exports = 'ngAviary';
-	} else {
-		ngAviary(angular, (typeof global !== 'undefined' ? global : window).Aviary);
-	}
 })();
