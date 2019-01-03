@@ -1,4 +1,4 @@
 # Angular Aviary SDK
 An angular wrapper for Aviary SDK (Adobe Creative SDK)
 
-[Live Demo](http://m00s.github.io/angular-aviary/)
+[Live Demo](https://eversnapteam.github.io/angular-aviary/)
