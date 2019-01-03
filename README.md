@@ -2,6 +2,8 @@
 
 AngularJS directive for [Aviary SDK](https://developers.aviary.com/).
 
+[Live Demo](https://eversnapteam.github.io/angular-aviary/)
+
 Copyright © 2016, [Massimiliano Sartoretto](mailto:massimilianosartoretto@gmail.com)
 
 Find me on:
