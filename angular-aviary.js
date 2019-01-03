@@ -25,8 +25,6 @@
         },
         link: function (scope, element, attrs) {
 
-          var targetImage = window.document.querySelector(scope.targetSelector);
-
           element.bind('click', function(e) {
             e.preventDefault();
             return launchEditor();
@@ -45,6 +43,8 @@
           );
 
           function launchEditor() {
+            var targetImage = window.document.querySelector(scope.targetSelector);            
+
             featherEditor.launch({
               image: targetImage,
               url: scope.targetSrc || targetImage.src
@@ -53,8 +53,11 @@
           }
 
           function onSaveButtonClickedCb(imageID) {
+            var canvasId = ngAviary.configuration.adobeCanvasSelector || '#avpw_canvas_element';
+            var canvas = angular.element(document.querySelector(canvasId))[0];
+
             // User onSaveButtonClicked callback
-            (scope.onSaveButtonClicked || angular.noop)({id: imageID});
+            return (scope.onSaveButtonClicked || angular.noop)({ id: imageID, canvas: canvas, featherEditor: featherEditor });
           }
 
           function onSaveCb(imageID, newURL) {
